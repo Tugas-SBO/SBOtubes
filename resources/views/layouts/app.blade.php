@@ -43,12 +43,11 @@
     @stack('styles')
 </head>
 <body>
-
 @if(View::hasSection('fullpage'))
     @yield('fullpage')
 @else
     <nav class="stayq-navbar">
-        <a href="{{ route('home') }}" style="text-decoration:none;">
+        <a href="{{ route('dashboard') }}" style="text-decoration:none;">
             <div class="logo-box">
                 <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20 6L6 16v18h10v-10h8v10h10V16L20 6z" fill="#1565C0"/>
@@ -65,7 +64,6 @@
     </nav>
     @yield('content')
 @endif
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 @stack('scripts')
 </body>

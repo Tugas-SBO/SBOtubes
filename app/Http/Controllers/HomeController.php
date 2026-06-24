@@ -22,7 +22,7 @@ class HomeController extends Controller
         return view('home.all', compact('hotels'));
     }
 
-    // Tambahkan ini:
+    // ====== HOTEL DETAIL / PAYMENT PAGE ======
     public function detail(Hotel $hotel)
     {
         return view('home.detail', compact('hotel'));
