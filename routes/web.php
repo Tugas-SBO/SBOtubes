@@ -42,4 +42,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/account-setting', [ProfileController::class, 'accountSetting'])->name('account.setting');
     Route::put('/account-setting', [ProfileController::class, 'updateAccount'])->name('account.update');
     Route::get('/help-center', [ProfileController::class, 'helpCenter'])->name('help.center');
+    Route::get('/hotels', [HomeController::class, 'allHotels'])->name('hotels.all');
 });
