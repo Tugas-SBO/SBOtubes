@@ -76,49 +76,38 @@
 <div class="page-blue">
     <div style="width: 100%; max-width: 900px;">
         <div class="payment-title">PAYMENT</div>
-
         <div class="d-flex gap-5 align-items-start flex-wrap">
-            {{-- Hotel Photo --}}
             <div>
                 @if($hotel->image)
-                    <img src="{{ asset('storage/' . $hotel->image) }}"
-                         class="hotel-photo" alt="{{ $hotel->name }}">
+                <img src="{{ asset('storage/' . $hotel->image) }}"
+                    class="hotel-photo" alt="{{ $hotel->name }}">
                 @else
-                    <div class="photo-placeholder"><i class="bi bi-building"></i></div>
+                <div class="photo-placeholder"><i class="bi bi-building"></i></div>
                 @endif
             </div>
-
-            {{-- Details --}}
             <div class="flex-grow-1">
                 <div class="facility-title">FACILITY</div>
-
                 @php $facilities = $hotel->facilities; @endphp
-
                 @if(count($facilities) > 0)
                 <div class="row">
                     <div class="col-6">
                         @foreach(array_slice($facilities, 0, 4) as $f)
-                            <div class="facility-item">{{ $f }}</div>
+                        <div class="facility-item">{{ $f }}</div>
                         @endforeach
                     </div>
                     <div class="col-6">
                         @foreach(array_slice($facilities, 4) as $f)
-                            <div class="facility-item">{{ $f }}</div>
+                        <div class="facility-item">{{ $f }}</div>
                         @endforeach
                     </div>
                 </div>
                 @else
-                    <p class="text-white opacity-75">Fasilitas belum diisi.</p>
+                <p class="text-white opacity-75">Fasilitas belum diisi.</p>
                 @endif
-
                 <div class="price-text mt-4">
                     ${{ number_format($hotel->price_per_night, 0) }}/night
                 </div>
-
-                <form action="{{ route('hotel.book', $hotel) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn-book">BOOK NOW</button>
-                </form>
+                <a href="{{ route('booking.create', $hotel) }}" class="btn-book" style="text-decoration:none; display:inline-block; text-align:center;">BOOK NOW</a>
             </div>
         </div>
     </div>

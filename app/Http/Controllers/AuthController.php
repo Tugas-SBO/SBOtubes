@@ -33,7 +33,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('profile'));
+            return redirect()->intended(route('dashboard'));
         }
 
         return back()->withErrors([
@@ -45,7 +45,7 @@ class AuthController extends Controller
     public function showRegister()
     {
         if (Auth::check()) {
-            return redirect()->route('profile');
+            return redirect()->route('dashboard');
         }
         return view('auth.register');
     }

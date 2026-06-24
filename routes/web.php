@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BookingController;
 
 // ===== AUTH =====
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -32,13 +33,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // ===== USER PROTECTED ROUTES =====
 Route::middleware('auth')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/', function() { return redirect()->route('dashboard'); });
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/hotel/{hotel}', [HomeController::class, 'detail'])->name('hotel.detail');
-    Route::post('/hotel/{hotel}/book', function () {
-        return back()->with('success', 'Booking berhasil!');
-    })->name('hotel.book');
+    Route::get('/hotel/{hotel}/book', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('/hotel/{hotel}/book', [BookingController::class, 'store'])->name('hotel.book');
+    Route::get('/booking/success', [BookingController::class, 'success'])->name('booking.success');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/account-setting', [ProfileController::class, 'accountSetting'])->name('account.setting');
     Route::put('/account-setting', [ProfileController::class, 'updateAccount'])->name('account.update');
     Route::get('/help-center', [ProfileController::class, 'helpCenter'])->name('help.center');
+    Route::get('/hotels', [HomeController::class, 'allHotels'])->name('hotels.all');
 });
